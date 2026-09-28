@@ -121,14 +121,13 @@ footer{padding:26px 0;border-top:1px solid var(--line);font-size:10px;letter-spa
 .reveal.visible{opacity:1;transform:none}
 
 /* LANGUAGE CONTENT */
-[data-lang]{display:none}
-html[data-language="en"] [data-lang="en"]{display:initial}
-html[data-language="fr"] [data-lang="fr"]{display:initial}
-div[data-lang],p[data-lang],span[data-lang],h1[data-lang],h2[data-lang],h3[data-lang],a[data-lang]{display:none}
-html[data-language="en"] div[data-lang="en"],html[data-language="en"] p[data-lang="en"],html[data-language="en"] span[data-lang="en"],html[data-language="en"] h1[data-lang="en"],html[data-language="en"] h2[data-lang="en"],html[data-language="en"] h3[data-lang="en"],html[data-language="en"] a[data-lang="en"]{display:block}
-html[data-language="fr"] div[data-lang="fr"],html[data-language="fr"] p[data-lang="fr"],html[data-language="fr"] span[data-lang="fr"],html[data-language="fr"] h1[data-lang="fr"],html[data-language="fr"] h2[data-lang="fr"],html[data-language="fr"] h3[data-lang="fr"],html[data-language="fr"] a[data-lang="fr"]{display:block}
-a[data-lang="en"],a[data-lang="fr"]{display:inline-flex!important}
-span[data-lang="en"],span[data-lang="fr"]{display:inline!important}
+[data-lang]{display:none!important}
+html[data-language="en"] [data-lang="en"]{display:inline!important}
+html[data-language="fr"] [data-lang="fr"]{display:inline!important}
+html[data-language="en"] div[data-lang="en"],html[data-language="fr"] div[data-lang="fr"]{display:block!important}
+html[data-language="en"] p[data-lang="en"],html[data-language="fr"] p[data-lang="fr"]{display:block!important}
+html[data-language="en"] h1[data-lang="en"],html[data-language="fr"] h1[data-lang="fr"],html[data-language="en"] h2[data-lang="en"],html[data-language="fr"] h2[data-lang="fr"],html[data-language="en"] h3[data-lang="en"],html[data-language="fr"] h3[data-lang="fr"]{display:block!important}
+html[data-language="en"] a[data-lang="en"],html[data-language="fr"] a[data-lang="fr"]{display:inline-flex!important}
 
 /* MOBILE */
 @media(max-width:1000px){
