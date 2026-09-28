@@ -122,12 +122,10 @@ footer{padding:26px 0;border-top:1px solid var(--line);font-size:10px;letter-spa
 
 /* LANGUAGE CONTENT */
 [data-lang]{display:none!important}
-html[data-language="en"] [data-lang="en"]{display:inline!important}
-html[data-language="fr"] [data-lang="fr"]{display:inline!important}
-html[data-language="en"] div[data-lang="en"],html[data-language="fr"] div[data-lang="fr"]{display:block!important}
-html[data-language="en"] p[data-lang="en"],html[data-language="fr"] p[data-lang="fr"]{display:block!important}
-html[data-language="en"] h1[data-lang="en"],html[data-language="fr"] h1[data-lang="fr"],html[data-language="en"] h2[data-lang="en"],html[data-language="fr"] h2[data-lang="fr"],html[data-language="en"] h3[data-lang="en"],html[data-language="fr"] h3[data-lang="fr"]{display:block!important}
-html[data-language="en"] a[data-lang="en"],html[data-language="fr"] a[data-lang="fr"]{display:inline-flex!important}
+[data-lang][hidden]{display:none!important}
+[data-lang].lang-visible{display:inline!important}
+div[data-lang].lang-visible,p[data-lang].lang-visible,h1[data-lang].lang-visible,h2[data-lang].lang-visible,h3[data-lang].lang-visible{display:block!important}
+a[data-lang].lang-visible{display:inline-flex!important}
 
 /* MOBILE */
 @media(max-width:1000px){
@@ -291,20 +289,26 @@ html[data-language="en"] a[data-lang="en"],html[data-language="fr"] a[data-lang=
 
 <script>
 (function(){
- const root=document.documentElement;
- const buttons=document.querySelectorAll('[data-set-lang]');
- function setLang(lang){
-   root.dataset.language=lang;
-   root.lang=lang;
-   buttons.forEach(b=>b.classList.toggle('active',b.dataset.setLang===lang));
-   try{localStorage.setItem('candice-language',lang)}catch(e){}
- }
- let saved='en';
- try{saved=localStorage.getItem('candice-language')||'en'}catch(e){}
- setLang(saved);
- buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.setLang)));
- const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
- document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const root=document.documentElement;
+  const items=document.querySelectorAll('[data-lang]');
+  const buttons=document.querySelectorAll('[data-set-lang]');
+  function setLang(lang){
+    root.dataset.language=lang;
+    root.lang=lang;
+    items.forEach(el=>{
+      const show=el.dataset.lang===lang;
+      el.hidden=!show;
+      el.classList.toggle('lang-visible',show);
+    });
+    buttons.forEach(btn=>btn.classList.toggle('active',btn.dataset.setLang===lang));
+    try{localStorage.setItem('candice-language',lang)}catch(e){}
+  }
+  let saved='en';
+  try{saved=localStorage.getItem('candice-language')||'en'}catch(e){}
+  setLang(saved);
+  buttons.forEach(btn=>btn.addEventListener('click',()=>setLang(btn.dataset.setLang)));
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 </script>
 </body>
